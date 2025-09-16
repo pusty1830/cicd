@@ -2,11 +2,11 @@ name: Backend CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted
+    runs-on: tenki-standard-autoscale
 
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
         run: npm run build --if-present
 
       - name: Run tests
-        run: npm test || true   # avoid blocking deploy if no tests
+        run: npm test || true # avoid blocking deploy if no tests
 
       - name: Deploy on EC2 with PM2
         run: |
